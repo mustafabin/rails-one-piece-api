@@ -2,10 +2,10 @@
 
 one:
   name: MyString
+  user_id: MyString
   type: 
-  user_id: 1
 
 two:
   name: MyString
+  user_id: MyString
   type: 
-  user_id: 1
