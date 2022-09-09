@@ -4,6 +4,7 @@ class CreateDevilFruits < ActiveRecord::Migration[7.0]
       t.string :name
       t.string :user_id
       t.string :df_type
+      t.boolean :sale
       t.timestamps
     end
   end

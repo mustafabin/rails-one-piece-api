@@ -15,12 +15,17 @@ class DevilFruitsController < ApplicationController
 
   # POST /devil_fruits
   def create
-    @devil_fruit = DevilFruit.new(devil_fruit_params)
 
-    if @devil_fruit.save
-      render json: @devil_fruit, status: :created, location: @devil_fruit
+    if session[:user_id]
+      @devil_fruit = DevilFruit.new(name: params[:name],df_type: params[:df_type], user_id:session[:user_id])
+      if @devil_fruit.save
+        render json: @devil_fruit, status: :created, location: @devil_fruit
+      else
+        render json: @devil_fruit.errors, status: :unprocessable_entity
+      end
+ 
     else
-      render json: @devil_fruit.errors, status: :unprocessable_entity
+      render json: {message:"Not logged in"}
     end
   end
 
@@ -50,6 +55,6 @@ class DevilFruitsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def devil_fruit_params
-      params.require(:devil_fruit).permit(:name, :user_id, :df_type)
+      params.require(:devil_fruit).permit(:name, :df_type)
     end
 end
