@@ -151,15 +151,9 @@ run rails server
     user_id: "27",
     created_at: "2022-08-31T21:06:27.561Z",
     updated_at: "2022-08-31T21:06:27.561Z",
-  },
-  {
-    id: 23,
-    name: "Giro Giro no Mi",
-    user_id: "28",
-    created_at: "2022-08-31T21:06:27.562Z",
-    updated_at: "2022-08-31T21:06:27.562Z",
-  },
-];
+  }
+  ...
+]
 ```
 
 <div id='/devil_fruits'></div>
