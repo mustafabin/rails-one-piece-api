@@ -19,7 +19,7 @@ class DevilFruitsController < ApplicationController
     if session[:user_id]
       @devil_fruit = DevilFruit.new(name: params[:name],df_type: params[:df_type], user_id:session[:user_id])
       if @devil_fruit.save
-        render json: @devil_fruit, status: :created, location: @devil_fruit
+        render json:  User.find(session[:user_id]), except: [:password_digest, :created_at, :updated_at], methods: [:devil_fruits]
       else
         render json: @devil_fruit.errors, status: :unprocessable_entity
       end
