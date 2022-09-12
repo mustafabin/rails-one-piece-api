@@ -139,18 +139,18 @@ run rails server
 ```JSON
 [
   {
-    id: 21,
-    name: "Ishi Ishi no Mi",
-    user_id: "26",
-    created_at: "2022-08-31T21:06:27.559Z",
-    updated_at: "2022-08-31T21:06:27.559Z",
+    "id": 21,
+    "name": "Ishi Ishi no Mi",
+    "user_id": "26",
+    "created_at": "2022-08-31T21:06:27.559Z",
+    "updated_at": "2022-08-31T21:06:27.559Z",
   },
   {
-    id: 22,
-    name: "Ori Ori no Mi",
-    user_id: "27",
-    created_at: "2022-08-31T21:06:27.561Z",
-    updated_at: "2022-08-31T21:06:27.561Z",
+    "id": 22,
+    "name": "Ori Ori no Mi",
+    "user_id": "27",
+    "created_at": "2022-08-31T21:06:27.561Z",
+    "updated_at": "2022-08-31T21:06:27.561Z",
   }
   ...
 ]
