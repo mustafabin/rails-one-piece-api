@@ -21,28 +21,26 @@ run rails server
 
 # Usage
 
-## All Routes
+## Important Routes
 
-- [`/characters` - All Characters](#/characters)
-- [`/characters/:id` - One Character with their devil fruit(s)](#/detail)
-- [`/fruits` - All stored devil fruits](#/fruits)
-- [`/eat-devil-fruit` - Give Character a devil fruit](#/eat-devil-fruit)
-- [`/destory-character/:id` - Deletes Character](#/destory-character/:id)
-- [`/update-character` - Updates Character](#/update-character)
+- [`/users` - All Users](#/characters)
+- [`/users/:id` - One User and their devil fruit(s)](#/detail)
+- [`/devil_fruits` - All stored devil fruits](#/devil_fruits)
+- [`/devil_fruits` - Give yourself a devil fruit](#/devil_fruits)
 
 <div id='/characters'></div>
 
-### `/characters` – All Characters
+### `/users` – All Users
 
 **Link**
 
-- `http://127.0.0.1:9292/characters`
+- `http://127.0.0.1:9292/users`
 
 #### Method
 
-| URI          | HTTP Method | Headers |
-| ------------ | ----------- | ------- |
-| `characters` | GET         | None    |
+| URI     | HTTP Method | Headers |
+| ------- | ----------- | ------- |
+| `users` | GET         | None    |
 
 #### Request Parameters
 
@@ -52,42 +50,41 @@ run rails server
 
 **Example Response:**
 
-```javascript
+```JSON
 [
-  {
-    id: 30,
-    name: "Dracule Mihawk",
-    email: "DraculeMihawk@bounty.com",
-    password:
-      "If I can't even protect my captain's dream, then whatever ambition I have is nothing but talk! Luffy must be the man who becomes the Pirate King!",
-    created_at: "2022-08-31T21:06:27.566Z",
-    updated_at: "2022-08-31T21:06:27.566Z",
-  },
-  {
-    id: 31,
-    name: "Bartholomew Kuma",
-    email: "BartholomewKuma@bounty.com",
-    password:
-      "To true friendship, how long you've known each other means nothing.",
-    created_at: "2022-08-31T21:06:27.568Z",
-    updated_at: "2022-08-31T21:06:27.568Z",
-  },
-];
+    {
+        "id": 67,
+        "name": "Trafalgar D. Water Law",
+        "email": "TrafalgarD.WaterLaw@bounty.com",
+        "qoute": "I love heroes, but I don't want to be one. Do you even know what a hero is!? For example, you have some meat. Pirates will feast on the meat, but the hero will distribute it among the people! I want to eat the meat!",
+        "created_at": "2022-09-09T17:11:20.076Z",
+        "updated_at": "2022-09-09T17:11:20.076Z"
+    },
+    {
+        "id": 69,
+        "name": "Momonosuke",
+        "email": "Momonosuke@bounty.com",
+        "qoute": "Maybe nothing in this world happens by accident. As everything happens for a reason, our destiny slowly takes form.",
+        "created_at": "2022-09-09T17:11:20.591Z",
+        "updated_at": "2022-09-09T17:11:20.591Z"
+    },
+    ....
+]
 ```
 
 <div id='/detail'></div>
 
-### `/characters/:id` – Character Details
+### `/users/:id` – Character Details
 
 **Link**
 
-- `http://127.0.0.1:9292/characters/1`
+- `http://127.0.0.1:9292/users/1`
 
 #### Method
 
-| URI              | HTTP Method | Headers |
-| ---------------- | ----------- | ------- |
-| `characters/:id` | GET         | None    |
+| URI         | HTTP Method | Headers |
+| ----------- | ----------- | ------- |
+| `users/:id` | GET         | None    |
 
 #### Request Parameters
 
@@ -97,35 +94,33 @@ run rails server
 
 **Example Response:**
 
-```javascript
+```JSON
 {
-    "user": {
-        "id": 31,
-        "name": "Magellan",
-        "email": "Magellan@bounty.com",
-        "password": "toilet",
-        "created_at": "2022-08-31T21:06:27.568Z",
-        "updated_at": "2022-09-01T16:20:22.303Z"
-    },
-    "fruits": [
+    "id": 67,
+    "name": "Trafalgar D. Water Law",
+    "email": "TrafalgarD.WaterLaw@bounty.com",
+    "qoute": "I love heroes, but I don't want to be one. Do you even know what a hero is!? For example, you have some meat. Pirates will feast on the meat, but the hero will distribute it among the people! I want to eat the meat!",
+    "devil_fruits": [
         {
-            "id": 26,
-            "name": "Doku Doku no Mi",
-            "user_id": "31",
-            "created_at": "2022-08-31T21:06:27.571Z",
-            "updated_at": "2022-08-31T21:06:27.571Z"
+            "id": 66,
+            "name": "Chiyu Chiyu no Mi",
+            "user_id": "67",
+            "df_type": "",
+            "sale": false,
+            "created_at": "2022-09-09T17:11:20.082Z",
+            "updated_at": "2022-09-09T17:11:20.082Z"
         }
     ]
 }
 ```
 
-<div id='/fruits'></div>
+<div id='/devil_fruits'></div>
 
-### `/fruits` – All Devil Fruits
+### `/devil_fruits` – All Devil Fruits
 
 **Link**
 
-- `http://127.0.0.1:9292/fruits`
+- `http://127.0.0.1:9292/devil_fruits`
 
 #### Method
 
@@ -141,7 +136,7 @@ run rails server
 
 **Example Response:**
 
-```javascript
+```JSON
 [
   {
     id: 21,
@@ -167,95 +162,47 @@ run rails server
 ];
 ```
 
-<div id='/eat-devil-fruit'></div>
+<div id='/devil_fruits'></div>
 
-### `/eat-devil-fruit` – Add devil fruit to a character
+### `/devil_fruits` – Add devil fruit to a character
 
 **Link**
 
-- `http://127.0.0.1:9292/eat-devil-fruit`
+- `http://127.0.0.1:9292/devil_fruits`
 
 #### Method
 
-| URI               | HTTP Method | Headers |
-| ----------------- | ----------- | ------- |
-| `eat-devil-fruit` | POST        | None    |
+| URI            | HTTP Method | Headers | Authenticated |
+| -------------- | ----------- | ------- | ------------- |
+| `devil_fruits` | POST        | None    | Yes           |
 
 #### Example Body
 
-```javascript
+```JSON
 {
-    "user_id": 33,
-    "devil_fruit":"Hito Hito no mi"
+    "name": "Magu Magu no Mi",
+    "df_type":"Logia"
 }
 ```
 
 **Example Response:**
 
-```javascript
+```JSON
 {
-    "user": {
-        "id": 33,
-        "name": "Trafalgar D. Water Law",
-        "email": "TrafalgarD.WaterLaw@bounty.com",
-        "password": "Stop counting only those things you have lost! What is gone, is gone! So ask yourself this. What is there... that still remains to you?!",
-        "created_at": "2022-08-31T21:06:27.575Z",
-        "updated_at": "2022-08-31T21:06:27.575Z"
-    },
-    "fruits": [
+    "id": 83,
+    "name": "mustafa",
+    "email": "mustafa@binalhag.dev",
+    "qoute": "test",
+    "devil_fruits": [
         {
-            "id": 28,
-            "name": "Pika Pika no Mi",
-            "user_id": "33",
-            "created_at": "2022-08-31T21:06:27.578Z",
-            "updated_at": "2022-08-31T21:06:27.578Z"
-        },
-        {
-            "id": 37,
-            "name": "Hito Hito no mi",
-            "user_id": "33",
-            "created_at": "2022-09-01T20:01:55.997Z",
-            "updated_at": "2022-09-01T20:01:55.997Z"
+            "id": 79,
+            "name": "Magu Magu no Mi",
+            "user_id": "83",
+            "df_type": "Logia",
+            "sale": null,
+            "created_at": "2022-09-12T15:14:12.513Z",
+            "updated_at": "2022-09-12T15:14:12.513Z"
         }
     ]
-}
-```
-
-<div id='/update-character'></div>
-
-### `/update-character` – Update character data
-
-**Link**
-
-- `http://127.0.0.1:9292/update-character`
-
-#### Method
-
-| URI                | HTTP Method | Headers |
-| ------------------ | ----------- | ------- |
-| `update-character` | PUT         | None    |
-
-#### Example Body
-
-```javascript
-{
-    "user_id": 33,
-    "name": "Usopp",
-    "email":"Usopp@elbaf.eastblue",
-    "password":"I never Lie"
-}
-// If only one field exists then only that field is updated and the rest default to there previous values
-```
-
-**Example Response:**
-
-```javascript
-{
-    "name": "Usopp",
-    "email": "Usopp@elbaf.eastblue",
-    "password": "I never Lie",
-    "id": 33,
-    "created_at": "2022-08-31T21:06:27.575Z",
-    "updated_at": "2022-09-01T20:26:55.515Z"
 }
 ```
