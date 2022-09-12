@@ -20,8 +20,8 @@ module OnePiece
     # config.eager_load_paths << Rails.root.join("extras")
 
 
-    config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::CookieStore
+    # config.middleware.use ActionDispatch::Cookies
+    # config.middleware.use ActionDispatch::Session::CookieStore
 
 
     # Only loads a smaller set of middleware suitable for API only apps.

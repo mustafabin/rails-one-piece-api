@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   def create
     @user = User.create!(user_params)
     if @user
-      session[:user_id] = @user.id
+      # session[:user_id] = @user.id
       render json: @user, status: :created, location: @user, except: [:password]
     else
       render json: @user.errors, status: :unprocessable_entity
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   def login 
     @user = User.find_by(email:user_params[:email]).try(:authenticate, user_params[:password])
     if @user
-        session[:user_id] = @user.id
+        # session[:user_id] = @user.id
         render json: @user
     else
         render json: {message:"401 not authorized"}
@@ -40,8 +40,9 @@ class UsersController < ApplicationController
    end
     
   def profile
-    if session[:user_id]
-      render json: User.find(session[:user_id]), except: [:password, :created_at, :updated_at], methods: [:devil_fruits]
+    # authenticated = session[:user_id]
+    if authenticated
+      render json: User.find(), except: [:password, :created_at, :updated_at], methods: [:devil_fruits]
     else
       render json: {message:"401 not authorized"}
     end
