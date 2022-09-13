@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @users = User.all
-
+    generate_token(1)
     render json: @users, except: [:password_digest]
   end
 
@@ -27,8 +27,8 @@ class UsersController < ApplicationController
   def login 
     @user = User.find_by(email:user_params[:email]).try(:authenticate, user_params[:password])
     if @user
-        # session[:user_id] = @user.id
-        render json: @user
+        token = generate_token @user.id
+        render json: {token: token}
     else
         render json: {message:"401 not authorized"}
       end
@@ -40,9 +40,10 @@ class UsersController < ApplicationController
    end
     
   def profile
-    # authenticated = session[:user_id]
-    if authenticated
-      render json: User.find(), except: [:password, :created_at, :updated_at], methods: [:devil_fruits]
+    token = request.headers['JWT']
+    user_id = decode_token(token)
+    if user_id
+      render json: User.find(user_id), except: [:password_digest, :created_at, :updated_at], methods: [:devil_fruits]
     else
       render json: {message:"401 not authorized"}
     end
@@ -67,6 +68,16 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+    end
+    def get_secret_key
+      "123"
+    end
+    def generate_token(user_id)
+      JWT.encode({user_id: user_id}, get_secret_key)
+    end
+
+    def decode_token(token)
+      JWT.decode(token, get_secret_key)[0]["user_id"]
     end
 
     # Only allow a list of trusted parameters through.
